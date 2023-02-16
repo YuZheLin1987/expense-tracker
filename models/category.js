@@ -6,4 +6,4 @@ const categorySchema = new Schema({
     required: true
   }
 })
-module.exports = mongoose.model('Record', categorySchema)
+module.exports = mongoose.model('Category', categorySchema)
