@@ -13,7 +13,7 @@ const recordSeed = [
   { name: '租金', date: '2015/04/01', amount: 25000, categoryName: '家居物業' },
 ]
 
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 
 const db = mongoose.connection
 db.on('error', () => {

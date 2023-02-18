@@ -1,1 +1,4 @@
-<h2>this is index page</h2>
+{{#each updateRecords}}
+  <i class="{{ this.icon }}"></i>
+  <p>{{ this.name }} / {{ this.date }} / {{ this.amount }}</p>
+{{/each}}
