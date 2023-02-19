@@ -64,6 +64,16 @@ app.put('/records/:id', async (req, res) => {
   }
 })
 
+app.delete('/records/:id', async (req, res) => {
+  try {
+    const _id = req.params.id
+    await Record.findOneAndDelete({ _id })
+    res.redirect('/')
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.post('/records', async (req, res) => {
   try {
     const { name, date, category, amount } = req.body
