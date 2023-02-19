@@ -34,7 +34,7 @@ app.get('/', async (req, res) => {
     record.icon = matchCategory.icon
     return record
   })
-  res.render('index', { updateRecords })
+  res.render('index', { updateRecords, categories })
 })
 
 app.listen(port, () => {

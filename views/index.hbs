@@ -1,4 +1,47 @@
-{{#each updateRecords}}
-  <i class="{{ this.icon }}"></i>
-  <p>{{ this.name }} / {{ this.date }} / {{ this.amount }}</p>
-{{/each}}
+<div class="row justify-content-center mb-3">
+  <div class="col-4 dropdown-center">
+    <button class="col w-100 btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      類別
+    </button>
+    <ul class="dropdown-menu">
+      {{#each categories}}
+        <li><a class="dropdown-item" href="#">{{ this.name }}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+<div class="row justify-content-center mb-3">
+  <div class="col-1">
+    <p>總金額：</p>
+  </div>
+  <div class="col-3 fs-1 text-end text-warning">
+    <p>88888</p>
+  </div>
+</div>
+<div class="row justify-content-center mb-3">
+  <ul class="list-group">
+    {{#each updateRecords}}
+      <li class="list-group-item">
+        <div class="row justify-content-end">
+          <div class="col-1">
+            <i class="{{ this.icon }}"></i>
+          </div>
+          <div class="col-4">
+            <p>{{ this.name}}</p>
+            <p>{{ this.date}}</p>
+          </div>
+          <div class="col-1">
+            <p>{{ this.amount }}</p>
+          </div>
+          <div class="col-2">
+            <button type="button" class="btn btn-success">修改</button>
+            <button type="button" class="btn btn-danger">刪除</button>
+          </div>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+<div class="row justify-content-center">
+  <a class="col-3 btn btn-warning" href="#" role="button">新增支出</a>
+</div>
