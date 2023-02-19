@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const Category = require('./models/category')
 const Record = require('./models/record')
 if (process.env.NODE_ENV !== 'production') {
@@ -21,6 +22,26 @@ db.once('open', () => {
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.get('/records/new', async (req, res) => {
+  const categories = await Category.find().lean()
+  res.render('new', { categories })
+})
+
+app.post('/records', async (req, res) => {
+  try {
+    const { name, date, category, amount } = req.body
+    const categories = await Category.find().lean()
+    const matchCategory = categories.find(c => {
+      return c.name.toString() === category
+    })
+    await Record.create({ name, date, categoryId: matchCategory._id, amount })
+    res.redirect('/')
+  } catch(err) {
+    console.log(err)
+  }
+})
 
 app.get('/', async (req, res) => {
   const categories = await Category.find().lean()
