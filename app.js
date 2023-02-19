@@ -92,7 +92,9 @@ app.get('/', async (req, res) => {
   try {
     const categories = await Category.find().lean()
     const records = await Record.find().lean()
+    let totalAmount = 0
     const updateRecords = records.map(record => {
+      totalAmount += record.amount
       const matchCategory = categories.find(category => {
         return category._id.toString() === record.categoryId.toString()
       })
@@ -100,7 +102,7 @@ app.get('/', async (req, res) => {
       record.icon = matchCategory.icon
       return record
     })
-    res.render('index', { updateRecords, categories })
+    res.render('index', { updateRecords, categories, totalAmount })
   } catch (err) {
     console.log(err)
   }
