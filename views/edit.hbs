@@ -1,0 +1,49 @@
+<form action="/records/{{ record._id }}?_method=PUT" method="POST">
+  <div class="row justify-content-center align-items-center mb-3">
+    <p class="text-center">請輸入您的支出</p>
+  </div>
+  <div class="row justify-content-center align-items-center mb-3">
+    <div class="col-1">
+      <label for="recordName" class="form-label">名稱：</label>
+    </div>
+    <div class="col-3">
+      <input type="text" class="form-control" id="recordName" aria-describedby="recordName" name="name" value="{{ record.name }}" required>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center mb-3">
+    <div class="col-1">
+      <label for="recordDate" class="form-label">日期：</label>
+    </div>
+    <div class="col-3">
+      <input type="date" class="form-control" id="recordDate" name="date" value="{{ record.date }}" required>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center mb-3">
+    <div class="col-1">
+      <label for="recordCategory" class="form-label">類別：</label>
+    </div>
+    <div class="col-3">
+      <select class="form-select" id="recordCategory" name="category">
+        {{#each categories}}
+          <option value="{{ this.name }}">{{ this.name }}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center mb-3">
+    <div class="col-1">
+      <label for="recordAmount" class="form-label">金額：</label>
+    </div>
+    <div class="col-3">
+      <input type="text" class="form-control" id="recordAmount" aria-describedby="recordAmount" name="amount" value="{{ record.amount }}" required>
+    </div>
+  </div>
+  <div class="row justify-content-center mb-3">
+    <div class="col-1">
+      <button type="submit" class="btn btn-warning w-100">儲存</button>
+    </div>
+    <div class="col-1">
+      <a class="btn btn-danger w-100" href="/" role="button">返回</a>
+    </div>
+  </div>
+</form>

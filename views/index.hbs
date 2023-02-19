@@ -34,8 +34,10 @@
             <p>{{ this.amount }}</p>
           </div>
           <div class="col-2">
-            <button type="button" class="btn btn-success">修改</button>
-            <button type="button" class="btn btn-danger">刪除</button>
+            <a class="btn btn-success" href="/records/{{ this._id }}/edit" role="button">修改</a>
+            <form action="./records/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+              <button class="btn btn-danger" type="submit">刪除</button>
+            </form>
           </div>
         </div>
       </li>
