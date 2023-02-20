@@ -1,6 +1,6 @@
 <form action="/records/{{ record._id }}?_method=PUT" method="POST">
   <div class="row justify-content-center align-items-center mb-3">
-    <p class="text-center">請輸入您的支出</p>
+    <p class="text-center">請修改您的支出</p>
   </div>
   <div class="row justify-content-center align-items-center mb-3">
     <div class="col-1">
@@ -25,7 +25,7 @@
     <div class="col-3">
       <select class="form-select" id="recordCategory" name="category">
         {{#each categories}}
-          <option value="{{ this.name }}">{{ this.name }}</option>
+          <option {{#if this.isSelected}} selected {{/if}} value="{{ this.name }}">{{ this.name }}</option>
         {{/each}}
       </select>
     </div>

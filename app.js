@@ -41,11 +41,11 @@ app.get('/records/:id/edit', async (req, res) => {
     const id = req.params.id
     const categories = await Category.find().lean()
     const record = await Record.findById(id).lean()
-    const matchCategory = categories.find(category => {
-      return category._id.toString() === record.categoryId.toString()
+    categories.map(category => {
+      return category.isSelected = category._id.toString() === record.categoryId.toString() // 新增屬性讓前端知道此筆資料原來的類別
     })
     record.date = record.date.toLocaleDateString('zu-ZA')
-    res.render('edit', { record, categories, matchCategory })
+    res.render('edit', { record, categories })
   } catch (err) {
     console.log(err)
   }
