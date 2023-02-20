@@ -88,6 +88,43 @@ app.post('/records', async (req, res) => {
   }
 })
 
+app.get('/filter', async (req, res) => {
+  try {
+    const selectCategoryName = req.query.filterSelect
+    
+    if (selectCategoryName === 'none') return res.redirect('/') // 選到“類別”就導回首頁
+
+    let totalAmount = 0
+    const categories = await Category
+      .find()
+      .lean()
+      
+    // 只撈出指定類別的紀錄
+    const records = await Record
+      .find({ categoryId: selectCategory._id })
+      .lean()
+
+    categories.map(category => {
+      return category.isSelected = category.name === selectCategoryName // 新增屬性讓前端知道現在所選的類別為何
+    })
+    
+    const selectCategory = categories.find(category => {
+      return category.name === selectCategoryName
+    })
+
+    const updateRecords = records.map(record => {
+      totalAmount += record.amount
+      record.date = record.date.toLocaleDateString('zu-ZA')
+      record.icon = selectCategory.icon
+      return record
+    })
+    
+    res.render('index', { updateRecords, categories, totalAmount })
+  } catch (err) {
+    console.log(err)
+  }
+})
+
 app.get('/', async (req, res) => {
   try {
     const categories = await Category.find().lean()
@@ -106,7 +143,6 @@ app.get('/', async (req, res) => {
   } catch (err) {
     console.log(err)
   }
-  
 })
 
 app.listen(port, () => {

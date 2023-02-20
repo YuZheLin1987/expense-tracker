@@ -1,14 +1,12 @@
 <div class="row justify-content-center mb-3">
-  <div class="col-4 dropdown-center">
-    <button class="col w-100 btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      類別
-    </button>
-    <ul class="dropdown-menu">
+  <form class="col-4" action="/filter" method="GET">
+    <select class="form-select" aria-label="filterSelect" name="filterSelect" onchange="submit()">
+      <option value="none">類別</option>
       {{#each categories}}
-        <li><a class="dropdown-item" href="#">{{ this.name }}</a></li>
+        <option {{#if this.isSelected}} selected {{/if}} value="{{ this.name }}">{{ this.name }}</option>
       {{/each}}
-    </ul>
-  </div>
+    </select>
+  </form>
 </div>
 <div class="row justify-content-center mb-3">
   <div class="col-1">
