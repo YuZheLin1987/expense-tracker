@@ -127,9 +127,16 @@ app.get('/filter', async (req, res) => {
 
 app.get('/', async (req, res) => {
   try {
+    let totalAmount = 0 // 計算總金額
     const categories = await Category.find().lean()
     const records = await Record.find().lean()
-    let totalAmount = 0
+
+    if (records.length === 0) {
+      const noRecord = true
+      return res.render('noResult', { categories, noRecord }) // 沒有任何資料導至noResult頁面
+    }
+
+    // 更新record資料
     const updateRecords = records.map(record => {
       totalAmount += record.amount
       const matchCategory = categories.find(category => {
