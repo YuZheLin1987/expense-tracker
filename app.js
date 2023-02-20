@@ -98,7 +98,9 @@ app.get('/filter', async (req, res) => {
     const categories = await Category
       .find()
       .lean()
-      
+    const selectCategory = categories.find(category => {
+      return category.name === selectCategoryName
+    })
     // 只撈出指定類別的紀錄
     const records = await Record
       .find({ categoryId: selectCategory._id })
@@ -107,10 +109,8 @@ app.get('/filter', async (req, res) => {
     categories.map(category => {
       return category.isSelected = category.name === selectCategoryName // 新增屬性讓前端知道現在所選的類別為何
     })
-    
-    const selectCategory = categories.find(category => {
-      return category.name === selectCategoryName
-    })
+
+    if (records.length === 0) return res.render('noResult', { categories }) // 沒有指定類別資料導至noResult頁面
 
     const updateRecords = records.map(record => {
       totalAmount += record.amount
@@ -118,7 +118,7 @@ app.get('/filter', async (req, res) => {
       record.icon = selectCategory.icon
       return record
     })
-    
+
     res.render('index', { updateRecords, categories, totalAmount })
   } catch (err) {
     console.log(err)

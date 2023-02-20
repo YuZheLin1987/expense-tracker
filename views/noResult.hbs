@@ -1,0 +1,20 @@
+<div class="row justify-content-center mb-3">
+  <form class="col-4" action="/filter" method="GET">
+    <select class="form-select" aria-label="filterSelect" name="filterSelect" onchange="submit()">
+      <option value="none">類別</option>
+      {{#each categories}}
+      <option {{#if this.isSelected}} selected {{/if}} value="{{ this.name }}">{{ this.name }}</option>
+      {{/each}}
+    </select>
+  </form>
+</div>
+<div class="row justify-content-center text-center mb-3">
+  <ul class="list-group">
+    <li class="list-group-item">
+      <p>尚無此類別紀錄，請選擇其他類別</p>
+    </li>
+  </ul>
+</div>
+<div class="row justify-content-center">
+  <a class="col-3 btn btn-warning" href="/records/new" role="button">新增支出</a>
+</div>
