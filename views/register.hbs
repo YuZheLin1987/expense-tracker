@@ -1,29 +1,27 @@
 <h1 class="text-center">註冊</h1>
-<form action="/users/login" method="POST">
+<form action="/users/register" method="POST">
   <div class="row justify-content-center align-items-center">
     <div class="col-4 mb-3">
       <label for="name" class="form-label">姓名</label>
-      <input type="text" class="form-control" id="name" name="name" placeholder="請輸入您的名字"
-        aria-describedby="emailHelp">
+      <input type="text" class="form-control" id="name" name="name" placeholder="請輸入您的名字" value="{{ name }}">
     </div>
   </div>
   <div class="row justify-content-center align-items-center">
     <div class="col-4 mb-3">
       <label for="email" class="form-label">信箱</label>
-      <input type="email" class="form-control" id="email" name="email" placeholder="請輸入您的email"
-        aria-describedby="emailHelp">
+      <input type="email" class="form-control" id="email" name="email" placeholder="請輸入您的email" value="{{ email }}">
     </div>
   </div>
   <div class="row justify-content-center align-items-center">
     <div class="col-4 mb-3">
       <label for="password" class="form-label">密碼</label>
-      <input type="password" class="form-control" id="password" name="password" placeholder="請輸入您的密碼">
+      <input type="password" class="form-control" id="password" name="password" placeholder="請輸入您的密碼" value="{{ password }}">
     </div>
   </div>
   <div class="row justify-content-center align-items-center">
     <div class="col-4 mb-3">
       <label for="confirmPassword" class="form-label">確認密碼</label>
-      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="請再次輸入您的密碼">
+      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="請再次輸入您的密碼" value="{{ confirmPassword }}">
     </div>
   </div>
   <div class="row justify-content-center align-items-center pt-3">
