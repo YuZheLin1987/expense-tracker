@@ -1,1 +1,21 @@
-<h2>this is login page</h2>
+<h1 class="text-center">登入</h1>
+<form action="/users/login" method="POST">
+  <div class="row justify-content-center align-items-center">
+    <div class="col-4 mb-3">
+      <label for="email" class="form-label">信箱</label>
+      <input type="email" class="form-control" id="email" name="email" placeholder="請輸入您的信箱" >
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-4 mb-3">
+      <label for="password" class="form-label">密碼</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="請輸入您的密碼">
+    </div>
+  </div>
+  <div class="row justify-content-center align-items-center pt-3">
+    <button type="submit" class="col-4 btn btn-dark">登入</button>
+  </div>
+  <div class="row justify-content-center align-items-center pt-3">
+    <a class="col-4 btn btn-outline-secondary" href="/users/register" role="button">註冊</a>
+  </div>
+</form>
