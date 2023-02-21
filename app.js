@@ -1,4 +1,5 @@
 const express = require('express')
+const session = require('express-session')
 const exphbs = require('express-handlebars')
 require('./config/mongoose')
 const bodyParser = require('body-parser')
@@ -10,6 +11,11 @@ const port = 3000
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
+app.use(session({
+  secret: 'ThisIsSecret',
+  resave: false,
+  saveUninitialized: true
+}))
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(routes)
