@@ -9,7 +9,8 @@ router.get('/login', (req, res) => {
 
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureMessage: true
 }))
 
 router.get('/register', (req, res) =>{
@@ -19,6 +20,23 @@ router.get('/register', (req, res) =>{
 router.post('/register', async (req, res) => {
   try {
     const { name, email, password, confirmPassword } = req.body
+    const errors = [] // 儲存註冊資料有誤的錯誤訊息
+    if (!email || !password || !confirmPassword) {
+      errors.push({ message: '姓名以外的資料為必填！'})
+    }
+    if (password !== confirmPassword) {
+      errors.push({ message: '密碼與確認密碼不相符！' })
+    }
+    if (errors.length) {
+      return res.render('register', {
+        errors,
+        name,
+        email,
+        password,
+        confirmPassword
+      })
+    }
+
     // 用email檢查有無註冊過，有則註冊失敗，並回到註冊頁
     const registeredUser = await User.findOne({ email })
     if (registeredUser) {
@@ -39,6 +57,7 @@ router.post('/register', async (req, res) => {
 
 router.get('/logout', (req, res) => {
   req.logout()
+  req.flash('success_msg', '你已成功登出')
   res.redirect('/users/login')
 })
 
