@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 const User = require('../../models/user')
 
 router.get('/login', (req, res) => {
@@ -40,14 +41,16 @@ router.post('/register', async (req, res) => {
     // 用email檢查有無註冊過，有則註冊失敗，並回到註冊頁
     const registeredUser = await User.findOne({ email })
     if (registeredUser) {
-      console.log('此信箱已經註冊過，請更換信箱')
-      return res.render('register', { name, email, password ,confirmPassword })
+      errors.push({ message: '此信箱已經註冊過，請更換信箱' })
+      return res.render('register', { errors, name, email, password ,confirmPassword })
     }
 
+    const salt = await bcrypt.genSalt(10)
+    const hashPassword = await bcrypt.hash(password, salt)
     await User.create({
       name,
       email,
-      password
+      password: hashPassword
     })
     return res.redirect('/')
   } catch(err) {
