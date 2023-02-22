@@ -5,6 +5,7 @@ const Record = require('../../models/record')
 
 router.get('/filter', async (req, res) => {
   try {
+    const userId = req.user._id
     const selectCategoryName = req.query.filterSelect
 
     if (selectCategoryName === 'none') return res.redirect('/') // 選到“類別”就導回首頁
@@ -18,7 +19,7 @@ router.get('/filter', async (req, res) => {
     })
     // 只撈出指定類別的紀錄
     const records = await Record
-      .find({ categoryId: selectCategory._id })
+      .find({ categoryId: selectCategory._id, userId })
       .lean()
 
     categories.map(category => {
