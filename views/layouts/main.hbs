@@ -12,8 +12,13 @@
 <body>
   <nav class="navbar navbar-dark bg-dark mb-3">
     <div class="container-fluid px-5">
-      <a class="navbar-brand" href="/">我的記帳本</a>
-      <a class="btn btn-outline-light" href="#" role="button">登出</a>
+      <a class="navbar-brand" href="/">
+      {{#if isAuthenticated}}{{ user.name }}'s{{else}}我的{{/if}}記帳本</a>
+      {{#if isAuthenticated}}
+        <a class="btn btn-outline-light" href="/users/logout" role="button">登出</a>
+      {{else}}
+        <a class="btn btn-outline-light" href="/users/login" role="button">登入</a>
+      {{/if}}
     </div>
   </nav>
   <div class="container mt-3">
