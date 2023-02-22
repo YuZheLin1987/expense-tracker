@@ -43,8 +43,9 @@ router.get('/filter', async (req, res) => {
 router.get('/', async (req, res) => {
   try {
     let totalAmount = 0 // 計算總金額
+    const userId = req.user._id
     const categories = await Category.find().lean()
-    const records = await Record.find().lean()
+    const records = await Record.find({ userId }).lean()
 
     if (records.length === 0) {
       const noRecord = true
