@@ -9,12 +9,12 @@ const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 
 const app = express()
-const port = 3000
+const port = process.env.PORT
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(session({
-  secret: 'ThisIsSecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
