@@ -21,6 +21,7 @@ router.get('/filter', async (req, res) => {
     const records = await Record
       .find({ categoryId: selectCategory._id, userId })
       .lean()
+      .sort({ date: 'desc' })
 
     categories.map(category => {
       return category.isSelected = category.name === selectCategoryName // 新增屬性讓前端知道現在所選的類別為何
@@ -46,7 +47,7 @@ router.get('/', async (req, res) => {
     let totalAmount = 0 // 計算總金額
     const userId = req.user._id
     const categories = await Category.find().lean()
-    const records = await Record.find({ userId }).lean()
+    const records = await Record.find({ userId }).lean().sort({ date: 'desc' })
 
     if (records.length === 0) {
       const noRecord = true
