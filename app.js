@@ -9,7 +9,7 @@ const usePassport = require('./config/passport')
 const flash = require('connect-flash')
 
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3000
 
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
